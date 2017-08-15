@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		
+	<!-- 启动的时候验证是否有生产者 -->
+	<dubbo:consumer check="false" timeout="${dubbo.registry.timeout}" retries="${dubbo.registry.retries}" />
+	
+	<!-- Dubbo事务接口,实现注入 -->
+<!-- 	<import resource="classpath:transaction/transaction-interface.xml"/> -->
+	
+</beans>  

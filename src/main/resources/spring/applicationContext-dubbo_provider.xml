@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://code.alibabatech.com/schema/dubbo
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- DUBBO 配置 -->
+	<!-- 提供方应用信息，用于计算依赖关系 -->
+	<dubbo:application name="${dubbo.application.owner}"/>
+
+	<!-- 使用zookeeper广播注册中心暴露服务地址 -->
+	<dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" />
+
+	<!-- 用dubbo协议在20880端口暴露服务 -->
+	<dubbo:protocol name="dubbo" port="${dubbo.kuier.port}" dispatcher="all" threadpool="fixed" threads="100"/>
+	
+	<!-- 扫描注解包路径,多个包用逗号分隔,不填pacakge表示扫描当前ApplicationContext中所有的类 -->
+	<dubbo:annotation package="com.dmm.service.impl"/>
+
+	<!-- Dubbo事务接口,实现暴露 -->
+	<import resource="classpath:transaction/dubbo-transaction.xml"/>
+
+</beans>
